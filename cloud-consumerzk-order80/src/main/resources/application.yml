@@ -1,0 +1,14 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-customer-order
+  cloud:
+    zookeeper:
+      connect-string: 123.57.83.62:9689,123.57.83.62:9690,123.57.83.62:9691
+      discovery:
+        instance-host: ${spring.cloud.client.ipAddress}  #注册的ip
+          instance-id: zkcustomer80 #注册服务的实例id
+
+
