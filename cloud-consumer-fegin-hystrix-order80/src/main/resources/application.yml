@@ -22,3 +22,7 @@ ribbon:
 logging:
   level:
     com.jolan.springcloud.service.PaymentFeginService: debug
+
+feign:
+  hystrix:
+    enabled: true

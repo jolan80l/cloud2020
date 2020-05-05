@@ -28,4 +28,10 @@ public class OrderController {
         return result;
     }
 
+    @GetMapping(value = "/consumer/payment/zipkin")
+    public String paymentZipkin(){
+        String result = restTemplate.getForObject(INVOKE_URL + "/payment/zipkin", String.class);
+        return result;
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.jolan.springcloud.controller;
 
 import com.jolan.springcloud.service.PaymentService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +30,21 @@ public class PaymentController {
         return result;
     }
 
+
     @GetMapping(value = "/payment/hystrix/timeout/{id}")
     public String paymentInfoTimeout(@PathVariable("id") Integer id){
         String result = paymentService.paymentInfoTimeout(id);
         log.info("*******result:{}", result);
         return result;
     }
+
+    //服务熔断
+
+    @GetMapping(value = "/payment/circuit/{id}")
+    public String paymentCircuitBreaker(@PathVariable("id") Integer id){
+        String result = paymentService.paymentCircuitBreaker(id);
+        log.info("*******result:{}", result);
+        return result;
+    }
+
 }
