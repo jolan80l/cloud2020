@@ -1,0 +1,38 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: payment_routh
+#          uri: http://localhost:8001
+          uri: lb://CLOUD-PROVIDER-PAYMENT
+          predicates:
+            - Path=/payment/get/**
+
+        - id: payment_routh2
+#          uri: http://localhost:8001
+          uri: lb://CLOUD-PROVIDER-PAYMENT
+          predicates:
+            - Path=/payment/lb/**
+            - After=2020-05-02T09:48:36.006+08:00[Asia/Shanghai]
+            #curl http://113.45.229.5:39527/payment/lb
+            #curl http://113.45.229.5:39527/payment/lb --cookie "username=jolan"
+#            - Cookie=username, jolan
+#            curl http://113.45.229.5:39527/payment/lb --cookie "username=jolan" -H "X-Request-Id:123"
+#            - Header=X-Request-Id, \d+
+      discovery:
+        locator:
+          enabled: true
+
+eureka:
+  instance:
+    hostname: cloud-gateway-service
+  client:
+    service-url:
+      register-with-eureka: true
+      fetch-register: true
+      defaultZone: http://eureka7001.com:7001/eureka
