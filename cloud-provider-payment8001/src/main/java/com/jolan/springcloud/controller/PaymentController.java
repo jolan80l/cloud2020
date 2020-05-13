@@ -15,18 +15,18 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author jolan80
  * @date 2020-04-13 23:44
- */
-@RestController
-@Slf4j
-public class PaymentController {
-    @Resource
-    private PaymentService paymentService;
+            */
+    @RestController
+    @Slf4j
+    public class PaymentController {
+        @Resource
+        private PaymentService paymentService;
 
-    @Value("${server.port}")
-    private  String serverPort;
+        @Value("${server.port}")
+        private  String serverPort;
 
-    @Resource
-    private DiscoveryClient discoveryClient;
+        @Resource
+        private DiscoveryClient discoveryClient;
 
     @PostMapping(value="/payment/create")
     public CommonResult create(@RequestBody Payment payment){
