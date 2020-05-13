@@ -2,6 +2,7 @@ package com.jolan.springcloud.com.jolan.springcloud.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.jolan.springcloud.com.jolan.springcloud.myhandler.CustomerBlockHandler;
 import com.jolan.springcloud.entities.CommonResult;
 import com.jolan.springcloud.entities.Payment;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,12 @@ public class RateLimitController {
     @GetMapping(value = "/rateLimit/byUrl")
     @SentinelResource(value = "byUrl")
     public CommonResult byUrl(){
-        return new CommonResult(200, "按URL限流测试OK", new Payment(2020L, "serial001"));
+        return new CommonResult(200, "按URL限流测试OK", new Payment(2020L, "serial002"));
+    }
+
+    @GetMapping(value = "/rateLimit/customerBlockHandler")
+    @SentinelResource(value = "customerBlockHandler", blockHandlerClass = CustomerBlockHandler.class, blockHandler = "handlerException2")
+    public CommonResult customerBlockHandler(){
+        return new CommonResult(200, "按客户自定义", new Payment(2020L, "serial003"));
     }
 }

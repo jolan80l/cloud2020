@@ -12,5 +12,6 @@ spring:
         server-addr: 123.57.83.62:8848
         file-extension: yaml #指定yaml格式的配置
         group: DEV_GROUP
+        namespace: f2a9a8ae-aa88-400b-b201-fe6019f7e01c
 
 #${prefix}-${spring.profile.active}.${file-extension}
